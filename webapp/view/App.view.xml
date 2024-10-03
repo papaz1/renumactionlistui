@@ -21,12 +21,12 @@
 			<l:BlockLayoutRow>
 				<l:BlockLayoutCell
 					id="FileUploaderCell"
-					width="2"
-					backgroundColorSet="ColorSet10"
-					backgroundColorShade="ShadeB">
+					width="2">
 					<u:FileUploader 
 						id="fileUploader" 
+						fileType="csv"
 						placeholder="Choose action list CSV file..." 
+						typeMissmatch="handleTypeMissmatch"
 						width="40%"/>
 				</l:BlockLayoutCell>
 			</l:BlockLayoutRow>
@@ -36,20 +36,23 @@
 				<l:BlockLayoutCell
 					id="TextAreaCell"
 					width="2"
-					title="Output Log"
-					backgroundColorSet="ColorSet10"
-					backgroundColorShade="ShadeB">
+					title="Output Log">
+					
 					<!-- VBox to stack the TextArea and Button -->
 					<VBox width="100%">
 						<TextArea 
 							id="myTextArea" 
+							editable="false"
 							rows="15" 
-							width="40%" 
-							editable="false"/>
+							width="40%" />
 
 						<!-- Align OK button to the right -->
 						<HBox justifyContent="End" width="40%">
-							<Button text="Renumber"/>
+							<Button 
+								id="renumberButton"
+								enabled="false"
+								text="Renumber"
+								press="onRenumberPress"/>
 						</HBox>
 					</VBox>
 				</l:BlockLayoutCell>
