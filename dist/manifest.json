@@ -1,0 +1,43 @@
+{
+  "_version": "1.58.0",
+  "sap.app": {
+    "id": "ui5.walkthrough",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "type": "application",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "i18n": {
+      "bundleUrl": "i18n/i18n.properties",
+      "supportedLocales": [
+        "",
+        "en",
+        "en_us"
+      ]
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.108.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {}
+      }
+    },
+    "models": {},
+    "rootView": {
+      "viewName": "renumactionlistui.view.App",
+      "type": "XML",
+      "id": "app"
+    }
+  }
+}

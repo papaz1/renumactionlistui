@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/UIComponent","sap/ui/model/json/JSONModel","sap/ui/model/resource/ResourceModel"],(e,i,t)=>{"use strict";return e.extend("renumactionlistui.Component",{metadata:{interfaces:["sap.ui.core.IAsyncContentCreation"],rootView:{viewName:"renumactionlistui.view.App",type:"XML",id:"app"}},init(){e.prototype.init.apply(this,arguments);const n={recipient:{name:"World"}};const o=new i(n);this.setModel(o);const s=new t({bundleName:"renumactionlistui.i18n.i18n"});this.setModel(s,"i18n")}})});
+//# sourceMappingURL=Component.js.map
