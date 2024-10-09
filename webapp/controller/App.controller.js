@@ -4,7 +4,17 @@ sap.ui.define([
 ], (Controller, MessageToast) => {
 	"use strict";
 
-	return Controller.extend("renumactionlistui.controller.App", {		
+	return Controller.extend("renumactionlistui.controller.App", {	
+		onInit: function() {
+		
+			//This setting controls the width of components in the view
+			//so that they are all aligned.
+			var oViewModel = new sap.ui.model.json.JSONModel({
+				widthPercentage: "40%" // This is the parameter
+			});
+			this.getView().setModel(oViewModel, "view");
+		},
+				
 		handleTypeMissmatch: function(oEvent) {
 			var aFileTypes = oEvent.getSource().getFileType();
 			aFileTypes.map(function(sType) {
@@ -70,10 +80,20 @@ sap.ui.define([
 					
 					// Set static text in the TextArea after successful upload
 					var oTextArea = controllerContext.getView().byId("logTextArea");
-					oTextArea.setValue("Success:\nNew file with renumbered Activity ID's generated successfully.");
+					oTextArea.setValue("Success:\nA new file with renumbered Activity IDs has been created.");
 				} else {
-					//Handle errors
-				}
+					
+					// Error: Handle error by reading the blob as text
+					var reader = new FileReader();
+					reader.onload = function() {
+						var errorMessage = reader.result;
+
+						// Set error message in TextArea
+						var oTextArea = controllerContext.getView().byId("logTextArea");
+						oTextArea.setValue("Error:\n" + errorMessage);
+					};
+					reader.readAsText(xhr.response); // Read blob as text to get error message
+					}
 			};
 		
 			xhr.onerror = function() {

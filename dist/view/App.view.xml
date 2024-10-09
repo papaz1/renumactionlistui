@@ -30,7 +30,7 @@
 						change="handleFileChange"
 						uploadComplete="onUploadComplete"
 						uploadUrl="http://localhost:8080/renumberactionlist"
-						width="40%"/>
+						width="{view>/widthPercentage}"/>
 				</l:BlockLayoutCell>
 			</l:BlockLayoutRow>
 
@@ -47,10 +47,10 @@
 							id="logTextArea" 
 							editable="false"
 							rows="15" 
-							width="40%" />
+							width="{view>/widthPercentage}" />
 
 						<!-- Align OK button to the right -->
-						<HBox justifyContent="End" width="40%">
+						<HBox justifyContent="End" width="{view>/widthPercentage}">
 							<Button 
 								id="renumberButton"
 								enabled="false"
