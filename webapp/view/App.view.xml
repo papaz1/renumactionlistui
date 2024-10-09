@@ -10,10 +10,10 @@
 				<l:BlockLayoutCell
 					id="Accent1"
 					width="2"
-					title="Renumber Activity IDs in the action list"
+					title="Renumber Activity IDs in the actionlist"
 					backgroundColorSet="ColorSet10" 
 					backgroundColorShade="ShadeE">
-					<Text text="Download the action list as a CSV from SharePoint, upload it here to renumber the Activity IDs, and receive a new CSV for creating a new action list on SharePoint." />
+					<Text text="Download the actionlist as a CSV from SharePoint, upload it here to renumber the Activity IDs, and receive a new CSV for creating a new actionlist on SharePoint." />
 				</l:BlockLayoutCell>
 			</l:BlockLayoutRow>
 
@@ -22,14 +22,15 @@
 				<l:BlockLayoutCell
 					id="FileUploaderCell"
 					width="2">
+					<Label text="Upload CSV File" labelFor="fileUploader" />
 					<u:FileUploader 
 						id="fileUploader" 
 						fileType="csv"
-						placeholder="Choose action list CSV file..." 
+						placeholder="Choose actionlist CSV file..." 
 						typeMissmatch="handleTypeMissmatch"
 						change="handleFileChange"
 						uploadComplete="onUploadComplete"
-						uploadUrl="http://localhost:8080/renumberactionlist"
+						uploadUrl="{view>/uploadUrl}"
 						width="{view>/widthPercentage}"/>
 				</l:BlockLayoutCell>
 			</l:BlockLayoutRow>
@@ -38,11 +39,11 @@
 			<l:BlockLayoutRow>
 				<l:BlockLayoutCell
 					id="TextAreaCell"
-					width="2"
-					title="Output Log">
+					width="2">
 					
 					<!-- VBox to stack the TextArea and Button -->
 					<VBox width="100%">
+						<Label text="Log Output" labelFor="logTextArea" />
 						<TextArea 
 							id="logTextArea" 
 							editable="false"

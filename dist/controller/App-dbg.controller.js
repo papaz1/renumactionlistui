@@ -13,6 +13,8 @@ sap.ui.define([
 				widthPercentage: "40%" // This is the parameter
 			});
 			this.getView().setModel(oViewModel, "view");
+			this._manifestData = this.getOwnerComponent().getManifestEntry("sap.app");
+			this._renumberActionListUri = this._manifestData.dataSources.RenumberActionList.uri;
 		},
 				
 		handleTypeMissmatch: function(oEvent) {
@@ -45,7 +47,7 @@ sap.ui.define([
 		},
 
 		onRenumberPress: function() {
-	
+
 			// Get the FileUploader control
 			var oFileUploader = this.getView().byId("fileUploader");
 
@@ -56,10 +58,9 @@ sap.ui.define([
 			var oFormData = new FormData();
 			oFormData.append("file", oFileInput.files[0]); // Using the key "file" and the first file
 			
-			// Create a new XMLHttpRequest
 			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "http://localhost:8080/renumberactionlist", true);
-			
+			xhr.open("POST", this._renumberActionListUri, true);
+
 			// Set response type to blob
 			xhr.responseType = "blob";
 			var controllerContext = this; 
@@ -80,7 +81,7 @@ sap.ui.define([
 					
 					// Set static text in the TextArea after successful upload
 					var oTextArea = controllerContext.getView().byId("logTextArea");
-					oTextArea.setValue("Success:\nNew file with renumbered Activity ID's is created.");
+					oTextArea.setValue("Success:\nA new file with renumbered Activity IDs has been created.");
 				} else {
 					
 					// Error: Handle error by reading the blob as text

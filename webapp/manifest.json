@@ -1,13 +1,22 @@
 {
   "_version": "1.58.0",
   "sap.app": {
-	"id": "ui5.walkthrough",
-	"title": "{{appTitle}}",
-	"description": "{{appDescription}}",
-	"type": "application",
-	"applicationVersion": {
-	  "version": "1.0.0"
-	}
+    "id": "ui5.walkthrough",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "type": "application",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "dataSources": {
+      "RenumberActionList": {
+        "uri": "http://localhost:8080/renumberactionlist",
+        "type": "REST",
+        "settings": {
+          "odataVersion": "2.0" 
+        }
+      }
+    }
   },
   "sap.ui": {
 	"technology": "UI5",

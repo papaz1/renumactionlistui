@@ -8,6 +8,15 @@
     "applicationVersion": {
       "version": "1.0.0"
     },
+    "dataSources": {
+      "RenumberActionList": {
+        "uri": "http://localhost:8080/renumberactionlist",
+        "type": "REST",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    },
     "i18n": {
       "bundleUrl": "i18n/i18n.properties",
       "supportedLocales": [
