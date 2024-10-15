@@ -46,63 +46,62 @@ sap.ui.define([
     		}
 		},
 
-		onRenumberPress: function() {
-
-			// Get the FileUploader control
-			var oFileUploader = this.getView().byId("fileUploader");
-
-			//Get the file input element by ID
-    		var oFileInput = document.getElementById(oFileUploader.getId() + "-fu"); // The ID of the input element
-			 
-			// Create and populate parameters to a FormData object
-			var oFormData = new FormData();
-			oFormData.append("file", oFileInput.files[0]); // Using the key "file" and the first file
-			
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", this._renumberActionListUri, true);
-
-			// Set response type to blob
-			xhr.responseType = "blob";
-			var controllerContext = this; 
-
-			xhr.onload = function() {
-				if (xhr.status === 200) {
+		onRenumberPress: async function() {
+			try {
+				// Get the FileUploader control
+				var oFileUploader = this.getView().byId("fileUploader");
 		
-					// Create a blob from the response
-					var blob = new Blob([xhr.response], { type: xhr.getResponseHeader("Content-Type") });
-					var link = document.createElement('a');
+				// Get the file input element by ID
+				var oFileInput = document.getElementById(oFileUploader.getId() + "-fu");
+		
+				// Create FormData and append the file
+				var oFormData = new FormData();
+				oFormData.append("file", oFileInput.files[0]); // Using the key "file" and the first file
+		
+				// Show Busy Indicator
+				sap.ui.core.BusyIndicator.show(0); // Show busy indicator with 0 ms delay
+		
+				// Send the POST request using fetch (await for the response)
+				const response = await fetch(this._renumberActionListUri, {
+					method: "POST",
+					body: oFormData
+				});
+				
+				oFileUploader.clear();
+				
+				// Check if the response is OK (status 200-299)
+				if (!response.ok) {
+				
+					// Error: Handle error by reading the response as text
+					const errorMessage = await response.text();
+					var oTextArea = this.getView().byId("logTextArea");
+					oTextArea.setValue("Error:\n" + errorMessage);
+				} else {
+				
+					// Success: Read the response as Blob
+					const blob = await response.blob();
+		
+					// Create a download link and trigger download
+					const link = document.createElement('a');
 					link.href = window.URL.createObjectURL(blob);
-					link.download = xhr.getResponseHeader("Content-Disposition").split('filename=')[1].replace(/"/g, '');
-					
-					// Automatically click the link to trigger the download
+					link.download = response.headers.get("Content-Disposition").split('filename=')[1].replace(/"/g, '');
 					document.body.appendChild(link);
 					link.click();
-					document.body.removeChild(link);					
-					
-					// Set static text in the TextArea after successful upload
-					var oTextArea = controllerContext.getView().byId("logTextArea");
+					document.body.removeChild(link);
+		
+					// Set success message in TextArea
+					var oTextArea = this.getView().byId("logTextArea");
 					oTextArea.setValue("Success:\nA new file with renumbered Activity IDs has been created.");
-				} else {
-					
-					// Error: Handle error by reading the blob as text
-					var reader = new FileReader();
-					reader.onload = function() {
-						var errorMessage = reader.result;
-
-						// Set error message in TextArea
-						var oTextArea = controllerContext.getView().byId("logTextArea");
-						oTextArea.setValue("Error:\n" + errorMessage);
-					};
-					reader.readAsText(xhr.response); // Read blob as text to get error message
-					}
-			};
-		
-			xhr.onerror = function() {
-				MessageToast.show("Error uploading file.");
-			};
-		
-			// Send the FormData
-			xhr.send(oFormData);
-		},
+				}
+			} catch (error) {
+				
+				// Handle unexpected errors (network issues, etc.)
+				MessageToast.show("Error uploading file: " + error.message);
+			} finally {
+				
+				// Always hide Busy Indicator, whether success or error
+				sap.ui.core.BusyIndicator.hide();
+			}
+		}		
 	});
 });
