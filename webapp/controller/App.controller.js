@@ -47,9 +47,11 @@ sap.ui.define([
 		},
 
 		onRenumberPress: async function() {
+			var controllerContext = this;
 			try {
+
 				// Get the FileUploader control
-				var oFileUploader = this.getView().byId("fileUploader");
+				var oFileUploader = controllerContext.getView().byId("fileUploader");
 		
 				// Get the file input element by ID
 				var oFileInput = document.getElementById(oFileUploader.getId() + "-fu");
@@ -68,6 +70,8 @@ sap.ui.define([
 				});
 				
 				oFileUploader.clear();
+				var oButton = controllerContext.getView().byId("renumberButton");
+				oButton.setEnabled(false);
 				
 				// Check if the response is OK (status 200-299)
 				if (!response.ok) {
