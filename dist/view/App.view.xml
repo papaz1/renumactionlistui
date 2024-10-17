@@ -8,7 +8,6 @@
 		<l:BlockLayout id="BlockLayout">
 			<l:BlockLayoutRow>
 				<l:BlockLayoutCell
-					id="Accent1"
 					width="2"
 					title="Renumber Activity IDs in the actionlist"
 					backgroundColorSet="ColorSet10" 
@@ -20,7 +19,6 @@
 			<!-- New Block with FileUploader Component -->
 			<l:BlockLayoutRow>
 				<l:BlockLayoutCell
-					id="FileUploaderCell"
 					width="2">
 					<Label text="Upload CSV File" labelFor="fileUploader" />
 					<u:FileUploader 
@@ -38,7 +36,6 @@
 			<!-- New Block with TextArea Component -->
 			<l:BlockLayoutRow>
 				<l:BlockLayoutCell
-					id="TextAreaCell"
 					width="2">
 					
 					<!-- VBox to stack the TextArea and Button -->
