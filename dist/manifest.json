@@ -10,7 +10,7 @@
     },
     "dataSources": {
       "RenumberActionList": {
-        "uri": "http://localhost:8080/renumberactionlist",
+        "uri": "/renumberactionlist",
         "type": "REST",
         "settings": {
           "odataVersion": "2.0"
@@ -21,8 +21,7 @@
       "bundleUrl": "i18n/i18n.properties",
       "supportedLocales": [
         "",
-        "en",
-        "en_us"
+        "en"
       ]
     }
   },

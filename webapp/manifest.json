@@ -10,7 +10,7 @@
     },
     "dataSources": {
       "RenumberActionList": {
-        "uri": "http://localhost:8080/renumberactionlist",
+        "uri": "/renumberactionlist",
         "type": "REST",
         "settings": {
           "odataVersion": "2.0" 
